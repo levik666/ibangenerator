@@ -7,3 +7,10 @@ cache:
   directories:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
+deploy:
+  provider: heroku
+  api_key:
+    secure: Kg3jkfFw3wLHb+eTjshPo8AgqujYq2qExl26lbp2WJyFeEypFkgnESBaJRYXicMwnhUyLXjPEFDKh+7qSop4BGTYIBVw85qpKWlHq8PnsGZY1hXKcxImxawNqVbeA2tzckitKKYlpLdFqyUyTwaVgkuNfLc3gD/Y3TfjYDAw3Yw8A8cMwGDi8wuVSk1RhiqHTDdQQ/pk09qdaeYjuSd8JgfcgfAWdqqrFSxTk2cEYOQmSnfcznUZCYRaIsjYpaqhJGENex+1H0Kua7l/jeqfnnligF3mDoyHrzaPlbONzfzAMeko/mrDAIw9th3bXc84v+7MxEgWG1QtDlV3+YeFJPidZADcMp+p7SrsNtXoJDH77FMMPP9QQvyEReKdf3yRLpH9f1wbJud/68SwFzEw+UamPLNo7y/DaLBj2Ux/ZNfS88g1tkImFXq9qdOHvzWqu9GjNz3yq4fjekohFknbKh22WRIEYZEC1R9Y88WctykAHsqsCh8x0VZreZjrsmDtOs1BRv0kmdqAubH7gGRNZBhoR5TDcQoYaCox2KVS4niksy1vXTGKQv3AkbgMuJ7yinbcN2ncrsMTZNg1j6n7incCdR8t5iNF6Ozc8p0qwksCrbxTG33d3Y8jiZVH+NUV3LNMDBIkqN5QGZbj3E7aQ7ZV1FmKQNozIVSiuqcfce4=
+  app: ibangenerator
+  on:
+    repo: levik666/ibangenerator
