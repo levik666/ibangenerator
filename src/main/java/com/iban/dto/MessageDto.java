@@ -1,6 +1,6 @@
 package com.iban.dto;
 
-public class Message {
+public class MessageDto {
 
     private String iban;
 

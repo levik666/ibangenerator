@@ -1,7 +1,7 @@
 package com.iban.controller;
 
 import com.iban.dto.ErrorDto;
-import com.iban.dto.Message;
+import com.iban.dto.MessageDto;
 import com.iban.service.IbanService;
 import org.iban4j.CountryCode;
 import org.iban4j.IbanFormatException;
@@ -21,20 +21,20 @@ public class IbanController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Message generateIban() {
-        Message message = new Message();
-        message.setIban(ibanService.generateIban());
-        return message;
+    public MessageDto generateIban() {
+        MessageDto messageDto = new MessageDto();
+        messageDto.setIban(ibanService.generateIban());
+        return messageDto;
     }
 
     @RequestMapping(value = "/{countryCode}/{bankCode}/{accountNumber}", method = RequestMethod.GET)
-    public Message iban(@PathVariable("countryCode") String countryCode,
-                        @PathVariable("bankCode") String bankCode,
-                        @PathVariable("accountNumber") String accountNumber) {
+    public MessageDto iban(@PathVariable("countryCode") String countryCode,
+                           @PathVariable("bankCode") String bankCode,
+                           @PathVariable("accountNumber") String accountNumber) {
         ibanService.validateCountryCodes(countryCode);
-        Message message = new Message();
-        message.setIban(ibanService.generateIban(countryCode, bankCode, accountNumber));
-        return message;
+        MessageDto messageDto = new MessageDto();
+        messageDto.setIban(ibanService.generateIban(countryCode, bankCode, accountNumber));
+        return messageDto;
     }
 
     @RequestMapping(value = "/countryCode", method = RequestMethod.GET)
