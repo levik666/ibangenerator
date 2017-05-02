@@ -1,16 +1,13 @@
 package com.iban.controller;
 
+import com.iban.dto.ErrorDto;
 import com.iban.dto.Message;
-import com.iban.dto.RequestIbanDto;
 import com.iban.service.IbanService;
 import org.iban4j.CountryCode;
+import org.iban4j.IbanFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,15 +27,23 @@ public class IbanController {
         return message;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public Message iban(@RequestBody @Valid RequestIbanDto requestIbanDto) {
+    @RequestMapping(value = "/{countryCode}/{bankCode}/{accountNumber}", method = RequestMethod.GET)
+    public Message iban(@PathVariable("countryCode") String countryCode,
+                        @PathVariable("bankCode") String bankCode,
+                        @PathVariable("accountNumber") String accountNumber) {
+        ibanService.validateCountryCodes(countryCode);
         Message message = new Message();
-        message.setIban(ibanService.generateIban(requestIbanDto));
+        message.setIban(ibanService.generateIban(countryCode, bankCode, accountNumber));
         return message;
     }
 
     @RequestMapping(value = "/countryCode", method = RequestMethod.GET)
     public List<CountryCode> countryCode() {
         return ibanService.getCountryCodes();
+    }
+
+    @ExceptionHandler({IbanFormatException.class, IllegalArgumentException.class})
+    public ErrorDto handelException(Exception exe) {
+        return new ErrorDto(exe.getMessage(), exe.getClass().getCanonicalName());
     }
 }

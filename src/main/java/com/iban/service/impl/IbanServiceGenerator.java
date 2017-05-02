@@ -1,6 +1,5 @@
 package com.iban.service.impl;
 
-import com.iban.dto.RequestIbanDto;
 import com.iban.service.IbanService;
 import org.iban4j.CountryCode;
 import org.iban4j.Iban;
@@ -18,11 +17,11 @@ public class IbanServiceGenerator implements IbanService {
     }
 
     @Override
-    public String generateIban(RequestIbanDto requestIbanDto) {
+    public String generateIban(String countryCode, String bankCode, String accountNumber) {
         Iban iban = new Iban.Builder()
-                .countryCode(requestIbanDto.getCountryCode())
-                .bankCode(requestIbanDto.getBankCode())
-                .accountNumber(requestIbanDto.getAccountNumber())
+                .countryCode(CountryCode.valueOf(countryCode))
+                .bankCode(bankCode)
+                .accountNumber(accountNumber)
                 .build();
         return iban.toString();
     }
@@ -30,5 +29,10 @@ public class IbanServiceGenerator implements IbanService {
     @Override
     public List<CountryCode> getCountryCodes() {
         return Arrays.asList(CountryCode.values());
+    }
+
+    @Override
+    public void validateCountryCodes(String countryCode) {
+        CountryCode.valueOf(countryCode);
     }
 }

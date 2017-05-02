@@ -1,6 +1,5 @@
 package com.iban.service;
 
-import com.iban.dto.RequestIbanDto;
 import org.iban4j.CountryCode;
 
 import java.util.List;
@@ -9,7 +8,9 @@ public interface IbanService {
 
     String generateIban();
 
-    String generateIban(RequestIbanDto requestIbanDto);
+    String generateIban(String countryCode, String bankCode, String accountNumber);
 
     List<CountryCode> getCountryCodes();
+
+    void validateCountryCodes(String countryCode);
 }
