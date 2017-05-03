@@ -27,6 +27,11 @@ public class IbanServiceGenerator implements IbanService {
     }
 
     @Override
+    public String generateIban(String countryCode) {
+        return Iban.random(CountryCode.valueOf(countryCode)).toString();
+    }
+
+    @Override
     public List<CountryCode> getCountryCodes() {
         return Arrays.asList(CountryCode.values());
     }

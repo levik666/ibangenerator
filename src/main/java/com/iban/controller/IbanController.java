@@ -37,6 +37,14 @@ public class IbanController {
         return messageDto;
     }
 
+    @RequestMapping(value = "/{countryCode}", method = RequestMethod.GET)
+    public MessageDto iban(@PathVariable("countryCode") String countryCode) {
+        ibanService.validateCountryCodes(countryCode);
+        MessageDto messageDto = new MessageDto();
+        messageDto.setIban(ibanService.generateIban(countryCode));
+        return messageDto;
+    }
+
     @RequestMapping(value = "/countryCode", method = RequestMethod.GET)
     public List<CountryCode> countryCode() {
         return ibanService.getCountryCodes();

@@ -10,6 +10,8 @@ public interface IbanService {
 
     String generateIban(String countryCode, String bankCode, String accountNumber);
 
+    String generateIban(String countryCode);
+
     List<CountryCode> getCountryCodes();
 
     void validateCountryCodes(String countryCode);
