@@ -72,7 +72,7 @@ public class IbanControllerTest {
 
     @Test
     public void generateIbanByCountryCodeAndBankCodeAndAccountNumber() throws Exception {
-        when(ibanService.generateIban()).thenReturn(IBAN);
+        when(ibanService.generateIban(COUNTRY_CODE_AT, BANK_CODE, ACCOUNT_NUMBER)).thenReturn(IBAN);
 
         mockMvc.perform(get("/" + COUNTRY_CODE_AT + "/" + BANK_CODE + "/" + ACCOUNT_NUMBER)
                 .contentType(MediaType.APPLICATION_JSON))
